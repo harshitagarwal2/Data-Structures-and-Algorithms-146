@@ -35,7 +35,7 @@ public class OutputTreePanel extends JPanel {
     
 	private void drawNode(Graphics g, int subtreeW, Node tree, int x, int y) {
 		 Node left, right;
-		 g.drawString(tree.getData().toString(), x-10, y+10);
+		 g.drawString(tree.getData().shortString(), x-10, y+10);
 		 left = tree.getLeft();
 		 right = tree.getRight();
 		 if (left != null)

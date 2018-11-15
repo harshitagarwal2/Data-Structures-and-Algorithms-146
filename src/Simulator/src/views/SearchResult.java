@@ -86,7 +86,7 @@ public class SearchResult extends JFrame {
 	        	public void actionPerformed(ActionEvent e) {
 	        		TreeGUIPanel panel = new TreeGUIPanel(results);
 	        		panel.setVisible(true);
-	        		
+	        		myframe.setVisible(false);
 	        	}
 	        });
 	        GroupLayout gl_topPanel = new GroupLayout(topPanel);

@@ -24,7 +24,7 @@ public class BSTModel {
 	
 	// prints the entire binary tree structure from least to greatest following the order of left->node->right
 	// @param Node node- the node from which the traversal starts, most typically the root
-	public void inOrderTreeWalk(Node node) {
+	public ArrayList<WebURLModel> inOrderTreeWalk(Node node) {
 		// checks if root's data exists
 		if (node != null) { 
 			
@@ -36,6 +36,7 @@ public class BSTModel {
 			// recursively call right child
 			inOrderTreeWalk(node.getRight());
 		}
+		return list;
 	}
 	
 	// searches for a given Node x with given integer k, and returns it

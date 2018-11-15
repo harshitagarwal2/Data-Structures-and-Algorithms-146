@@ -36,7 +36,7 @@ public class QuickSortModel {
 		double x = arr.get(r).getPriority();
 		int i = p-1;
 		for(int j = p ; j<r ; j++) {
-			if(arr.get(p).getPriority()<= x) {
+			if(arr.get(j).getPriority()<= x) {
 				i = i+1;
 				swap(arr, j, i);
 			}

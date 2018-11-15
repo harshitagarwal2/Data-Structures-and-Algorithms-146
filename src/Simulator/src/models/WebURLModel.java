@@ -166,5 +166,9 @@ public class WebURLModel implements Comparable<WebURLModel> {
 		}
 		return 0;
 	}
+	
+	public String shortString() {
+		return "P:"+getPriority()+",I:"+getIndex();
+	}
 
 }
