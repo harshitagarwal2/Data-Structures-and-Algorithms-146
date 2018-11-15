@@ -1,5 +1,6 @@
 package models;
 
+import java.util.Random;
 
 /**
  * @author harsh
@@ -17,6 +18,7 @@ public class WebURLModel implements Comparable<WebURLModel> {
 	private int links;
 	private int money;
 	private int index = 0;
+	
 
 	/*
 	 * Constructor
@@ -26,6 +28,17 @@ public class WebURLModel implements Comparable<WebURLModel> {
 		this.index = index;
 		this.frequency = frequency;
 		this.links = links;
+		this.age = age;
+		this.money = 1;
+		generatePriority();
+	}
+	
+	public WebURLModel(String URL, int frequency , int age, int index) {
+		Random r = new Random();
+		this.URL = URL;
+		this.index = index;
+		this.frequency = frequency;
+		this.links = r.nextInt(40)+15;
 		this.age = age;
 		this.money = 1;
 		generatePriority();
@@ -84,7 +97,7 @@ public class WebURLModel implements Comparable<WebURLModel> {
 	 */
 	@Override
 	public String toString() {
-		return URL + ":[Priority::  " + priority + ", age:" + age + ", frequency: " + frequency + " ]";
+		return URL + ":[Priority::  " + priority + ", Index::" + getIndex() + ", age:: " + age + ", frequency:: " + frequency + " Links:: " + getLinks() + " , Money:: " + getMoney()+ "]";
 	}
 
 	/**

@@ -12,6 +12,7 @@ import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
 
 import models.BSTModel;
+import models.Node;
 import models.WebURLModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -81,6 +82,17 @@ public class TreeGUIPanel extends javax.swing.JFrame{
         txtInsertFrequency.setColumns(10);
         
         JButton btnAdd = new JButton("Add");
+        btnAdd.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		String url = txtInserUrl.getText();
+        		int age = Integer.parseInt(txtInsertAge.getText());
+        		int freq = Integer.parseInt(txtInsertFrequency.getText());
+        		
+        		WebURLModel data= new WebURLModel(url, freq, age, results.size()); 
+        		tree.treeInsert(new Node(data));
+        		repaint();
+        	}
+        });
         
         JLabel lblDelete = new JLabel("Delete:");
         
@@ -89,6 +101,13 @@ public class TreeGUIPanel extends javax.swing.JFrame{
         txtEnterPriority.setColumns(10);
         
         JButton btnDelete = new JButton("Delete");
+        btnDelete.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		String item = txtEnterPriority.getText();
+        		tree.treeDelete(Double.parseDouble(item));
+        		repaint();
+        	}
+        });
         
         JLabel lblSort = new JLabel("Sort");
         

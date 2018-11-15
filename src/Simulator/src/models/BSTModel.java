@@ -42,9 +42,9 @@ public class BSTModel {
 	// searches for a given Node x with given integer k, and returns it
 	// @param Node x- the Node the search begins from, typically the root of the binary tree
 	// @param int k- the priority key we want to search for in a Node's Process
-	public Node treeSearch(Node x, int k) {
-		while (x != null && k != x.data.getPriority()) {
-			if (k < x.data.getPriority())
+	public Node treeSearch(Node x, Double x2) {
+		while (x != null && x2 != x.data.getPriority()) {
+			if (x2 < x.data.getPriority())
 				x = x.getLeft();
 			else 
 				x = x.getRight();
@@ -131,9 +131,9 @@ public class BSTModel {
 	// if Node z has no right child, then Node z is replaced by its left child
 	// if Node z has both left and right children, we find the minimum in the right subtree and replace Node z with it
 	// @param Node z- a Node inside of the binary search tree that will be deleted
-	public void treeDelete(Node z) {
-		Node y = new Node();
-		
+	public void treeDelete(Double x) {
+		Node z =  treeSearch( getRoot(), x);
+		Node y = null;
 		if (z.getLeft() == null)
 			transplant(z,z.getRight());
 		else if (z.getRight() == null) 
