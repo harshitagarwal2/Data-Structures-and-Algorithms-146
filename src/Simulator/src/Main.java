@@ -10,12 +10,23 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
+import models.CrawlerModel;
+import models.QuickSortModel;
+import models.WebURLModel;
+import views.SearchResult;
+
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.awt.event.ActionEvent;
 
 public class Main {
 
 	private JFrame frame;
 	private JTextField textField;
+	private Main myframe;
 
 	/**
 	 * Launch the application.
@@ -44,6 +55,7 @@ public class Main {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		myframe = this;
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1280, 720);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -62,6 +74,22 @@ public class Main {
 		textField.setColumns(10);
 		
 		JButton btnSearch = new JButton("Search");
+		btnSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				models.QuickSortModel ob = new QuickSortModel();
+				String query = btnSearch.getText();
+				CrawlerModel my = new CrawlerModel();
+				try {
+					my.getURLS(query);
+					ArrayList<WebURLModel> result = my.insertWebURIs();
+					SearchResult search = new SearchResult(result);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			
+			}
+		});
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
@@ -80,7 +108,7 @@ public class Main {
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
-					.addGap(190)
+					.addGap(190) 
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblSearchAKeyword)
 						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))

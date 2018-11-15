@@ -8,13 +8,19 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+
+import models.WebURLModel;
+
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.util.ArrayList;
+
 import javax.swing.JSplitPane;
 import javax.swing.JList;
 
@@ -25,8 +31,11 @@ public class SearchResult extends JFrame {
 	    private final JPanel topPanel;       // container panel for the top
 	    private final JPanel bottomPanel;    // container panel for the bottom
 	    private final JScrollPane scrollPane; // makes the text scrollable
+	    private static ArrayList<WebURLModel> results;
 	
-	    public SearchResult(){
+	    public SearchResult(ArrayList<WebURLModel> myList){
+	    	
+	    	results= myList;
 
 	        // first, lets create the containers:
 	        // the splitPane devides the window in two components (here: top and bottom)
@@ -79,7 +88,12 @@ public class SearchResult extends JFrame {
 	        scrollPane.setColumnHeaderView(lblNewLabel);
 	        
 	        JList list = new JList();
+	        DefaultListModel mode= new DefaultListModel<>();
+	        for(int i =0 ; i<results.size(); i++) {
+	        	mode.addElement(results.get(i));
+	        }
 	        scrollPane.setViewportView(list);
+	        list.setModel(mode);
 
 	        // let's set the maximum size of the inputPanel, so it doesn't get too big when the user resizes the window
 	  
@@ -90,7 +104,7 @@ public class SearchResult extends JFrame {
 	        EventQueue.invokeLater(new Runnable(){
 	            @Override
 	            public void run(){
-	                new SearchResult().setVisible(true);
+	                new SearchResult(results).setVisible(true);
 	            }
 	        });
 	    }
