@@ -83,6 +83,7 @@ public class Main {
 					my.getURLS(query);
 					ArrayList<WebURLModel> result = my.insertWebURIs();
 					SearchResult search = new SearchResult(result);
+					search.setVisible(true);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

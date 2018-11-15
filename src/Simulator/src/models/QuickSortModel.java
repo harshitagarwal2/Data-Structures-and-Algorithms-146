@@ -33,7 +33,7 @@ public class QuickSortModel {
 	 * and right array to have value greater than pivot
 	 */
 	public int partition(ArrayList<WebURLModel> arr, int p, int r) {
-		double x = arr.get(arr.size()-1).getPriority();
+		double x = arr.get(r).getPriority();
 		int i = p-1;
 		for(int j = p ; j<r ; j++) {
 			if(arr.get(p).getPriority()<= x) {

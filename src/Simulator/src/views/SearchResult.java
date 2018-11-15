@@ -9,8 +9,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
+import models.QuickSortModel;
 import models.WebURLModel;
 
+import javax.swing.Action;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
@@ -23,6 +25,10 @@ import java.util.ArrayList;
 
 import javax.swing.JSplitPane;
 import javax.swing.JList;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.beans.PropertyChangeListener;
+import java.awt.event.ActionEvent;
 
 public class SearchResult extends JFrame {
 
@@ -32,8 +38,12 @@ public class SearchResult extends JFrame {
 	    private final JPanel bottomPanel;    // container panel for the bottom
 	    private final JScrollPane scrollPane; // makes the text scrollable
 	    private static ArrayList<WebURLModel> results;
+	    private JButton btnQuicksort;
+	    private JButton btnSearchTree;
+	    private JFrame myframe;
 	
 	    public SearchResult(ArrayList<WebURLModel> myList){
+	    	myframe=  this;
 	    	
 	    	results= myList;
 
@@ -59,20 +69,51 @@ public class SearchResult extends JFrame {
 	        splitPane.setTopComponent(topPanel);                  // at the top we want our "topPanel"
 	        
 	        JLabel lblOperations = new JLabel("Operations:");
+	        
+	        btnQuicksort = new JButton("QuickSort");
+	        btnQuicksort.addActionListener(new ActionListener() {
+	        	public void actionPerformed(ActionEvent arg0) {
+	        		QuickSortModel model = new QuickSortModel();
+	        		model.sort(results, 0, results.size()-1);
+	        		SearchResult nResult = new SearchResult(results);
+	        		nResult.setVisible(true);
+	        		myframe.setVisible(false);
+	        	}
+	        });
+	        
+	        btnSearchTree = new JButton("Search Tree");
+	        btnSearchTree.addActionListener(new ActionListener() {
+	        	public void actionPerformed(ActionEvent e) {
+	        		TreeGUIPanel panel = new TreeGUIPanel(results);
+	        		panel.setVisible(true);
+	        		
+	        	}
+	        });
 	        GroupLayout gl_topPanel = new GroupLayout(topPanel);
 	        gl_topPanel.setHorizontalGroup(
 	        	gl_topPanel.createParallelGroup(Alignment.LEADING)
 	        		.addGroup(gl_topPanel.createSequentialGroup()
-	        			.addGap(72)
-	        			.addComponent(lblOperations)
-	        			.addContainerGap(81, Short.MAX_VALUE))
+	        			.addGroup(gl_topPanel.createParallelGroup(Alignment.LEADING)
+	        				.addGroup(gl_topPanel.createSequentialGroup()
+	        					.addGap(72)
+	        					.addComponent(lblOperations))
+	        				.addGroup(gl_topPanel.createSequentialGroup()
+	        					.addGap(54)
+	        					.addGroup(gl_topPanel.createParallelGroup(Alignment.LEADING)
+	        						.addComponent(btnSearchTree)
+	        						.addComponent(btnQuicksort))))
+	        			.addContainerGap(56, Short.MAX_VALUE))
 	        );
 	        gl_topPanel.setVerticalGroup(
 	        	gl_topPanel.createParallelGroup(Alignment.LEADING)
 	        		.addGroup(gl_topPanel.createSequentialGroup()
 	        			.addContainerGap()
 	        			.addComponent(lblOperations)
-	        			.addContainerGap(654, Short.MAX_VALUE))
+	        			.addGap(35)
+	        			.addComponent(btnQuicksort)
+	        			.addGap(18)
+	        			.addComponent(btnSearchTree)
+	        			.addContainerGap(555, Short.MAX_VALUE))
 	        );
 	        topPanel.setLayout(gl_topPanel);
 	        splitPane.setBottomComponent(bottomPanel);            // and at the bottom we want our "bottomPanel"
@@ -82,7 +123,7 @@ public class SearchResult extends JFrame {
 
 	        bottomPanel.add(scrollPane);                // first we add the scrollPane to the bottomPanel, so it is at the top
 	        
-	        JLabel lblNewLabel = new JLabel("New label");
+	        JLabel lblNewLabel = new JLabel("Search Results:");
 	        lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 23));
 	        lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 	        scrollPane.setColumnHeaderView(lblNewLabel);

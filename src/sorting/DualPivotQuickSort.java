@@ -1,5 +1,7 @@
 package sorting;
 
+import views.QuickSort;
+
 /**
  * The following Class implements a Quicksort algorithm with 2 pivots in it.
  * @author harsh

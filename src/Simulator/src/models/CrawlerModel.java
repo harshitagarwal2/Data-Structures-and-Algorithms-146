@@ -7,6 +7,8 @@ import java.util.Random;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -155,7 +157,9 @@ public class CrawlerModel {
     		url = "http://".concat(url);
     		
     	}try {
-    		Document document = Jsoup.connect(url).get();
+    		Connection.Response response = Jsoup.connect(url).userAgent("Mozilla").ignoreContentType(true).ignoreHttpErrors(true).timeout(10000).execute();
+
+    		Document document = ((Connection) response).get();
     		Elements links = document.select("a[href]");
            
             for (Element link : links) {
