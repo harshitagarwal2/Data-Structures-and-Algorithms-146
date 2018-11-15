@@ -1,3 +1,4 @@
+package models;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import org.jsoup.select.Elements;
  * Crawler gets all the related URLs to the query submitted 
  * 
  */
-public class Crawler {
+public class CrawlerModel {
 	/**
 	 * Set to get all the unique Urls available from the query passed.
 	 */
@@ -31,7 +32,7 @@ public class Crawler {
 	 * Constructor
 	 * 
 	 */
-	public Crawler() {
+	public CrawlerModel() {
 		Urls = new HashSet<>();
 	}
 
@@ -108,12 +109,12 @@ public class Crawler {
      * the indeex of the arraylist.
      * @return returns an arraylist filled with all the details. 
      */
-    public ArrayList<WebURI> insertWebURIs() {
-    	ArrayList<WebURI> urls = new ArrayList<>();
+    public ArrayList<WebURLModel> insertWebURIs() {
+    	ArrayList<WebURLModel> urls = new ArrayList<>();
     	int i=0 ;
     	for(String el :  Urls) {
     		//int linked = getLinkedSites(el);
-    		WebURI myURI = new WebURI(el,keywordsFrequency(), getrandomLinkNumberCount(), siteAge(), i);
+    		WebURLModel myURI = new WebURLModel(el,keywordsFrequency(), getrandomLinkNumberCount(), siteAge(), i);
     		myURI.generatePriority();
     		urls.add(myURI);
     		i++;

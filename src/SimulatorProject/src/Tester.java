@@ -2,6 +2,9 @@
 
 import java.util.ArrayList;
 
+import models.Crawler;
+import models.WebURI;
+
 /**
  * @author harsh
  * Tester method to test the WebURI

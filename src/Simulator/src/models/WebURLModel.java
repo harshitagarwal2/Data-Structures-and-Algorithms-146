@@ -1,10 +1,11 @@
+package models;
 
 
 /**
  * @author harsh
  * WebUrl object to hold the required information for the urls.
  */
-public class WebURI implements Comparable<WebURI> {
+public class WebURLModel implements Comparable<WebURLModel> {
 
 	/**
 	 * Data Instances
@@ -20,7 +21,7 @@ public class WebURI implements Comparable<WebURI> {
 	/*
 	 * Constructor
 	 */
-	public WebURI(String URL, int frequency, int links, int age, int index) {
+	public WebURLModel(String URL, int frequency, int links, int age, int index) {
 		this.URL = URL;
 		this.index = index;
 		this.frequency = frequency;
@@ -66,7 +67,7 @@ public class WebURI implements Comparable<WebURI> {
 	 * setter
 	 * @param URL sert
 	 */
-	public WebURI(String URL) {
+	public WebURLModel(String URL) {
 		this.URL = URL;
 	}
 
@@ -157,7 +158,7 @@ public class WebURI implements Comparable<WebURI> {
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
 	@Override
-	public int compareTo(WebURI o) {
+	public int compareTo(WebURLModel o) {
 		if (this.priority > o.priority) {
 			return 1;
 		} else if (this.priority < o.priority) {
