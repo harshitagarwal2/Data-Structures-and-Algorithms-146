@@ -8,7 +8,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
+import models.BucketSortModel;
 import models.QuickSortModel;
 import models.WebURLModel;
 
@@ -41,6 +44,9 @@ public class SearchResult extends JFrame {
 	    private JButton btnQuicksort;
 	    private JButton btnSearchTree;
 	    private JFrame myframe;
+	    private int index;
+	    private JButton btnUpdateItem;
+	    private JButton btnBucketsort;
 	
 	    public SearchResult(ArrayList<WebURLModel> myList){
 	    	myframe=  this;
@@ -89,6 +95,26 @@ public class SearchResult extends JFrame {
 	        		myframe.setVisible(false);
 	        	}
 	        });
+	        
+	        btnUpdateItem = new JButton("Update Item");
+	        btnUpdateItem.addActionListener(new ActionListener() {
+	        	public void actionPerformed(ActionEvent e) {
+	        		UpdateItem i = new UpdateItem(results, index );
+					i.setVisible(true);
+					myframe.setVisible(false);
+	        	}
+	        });
+	        
+	        btnBucketsort = new JButton("BucketSort");
+	        btnBucketsort.addActionListener(new ActionListener() {
+	        	public void actionPerformed(ActionEvent e) {
+	        		BucketSortModel model = new BucketSortModel();
+	        		model.sort(results);
+	        		SearchResult view = new SearchResult(results);
+	        		view.setVisible(true);
+	        		myframe.setVisible(false);
+	        	}
+	        });
 	        GroupLayout gl_topPanel = new GroupLayout(topPanel);
 	        gl_topPanel.setHorizontalGroup(
 	        	gl_topPanel.createParallelGroup(Alignment.LEADING)
@@ -101,8 +127,10 @@ public class SearchResult extends JFrame {
 	        					.addGap(54)
 	        					.addGroup(gl_topPanel.createParallelGroup(Alignment.LEADING)
 	        						.addComponent(btnSearchTree)
-	        						.addComponent(btnQuicksort))))
-	        			.addContainerGap(56, Short.MAX_VALUE))
+	        						.addComponent(btnQuicksort)
+	        						.addComponent(btnUpdateItem)
+	        						.addComponent(btnBucketsort))))
+	        			.addContainerGap(52, Short.MAX_VALUE))
 	        );
 	        gl_topPanel.setVerticalGroup(
 	        	gl_topPanel.createParallelGroup(Alignment.LEADING)
@@ -113,7 +141,11 @@ public class SearchResult extends JFrame {
 	        			.addComponent(btnQuicksort)
 	        			.addGap(18)
 	        			.addComponent(btnSearchTree)
-	        			.addContainerGap(555, Short.MAX_VALUE))
+	        			.addGap(18)
+	        			.addComponent(btnUpdateItem)
+	        			.addGap(27)
+	        			.addComponent(btnBucketsort)
+	        			.addContainerGap(464, Short.MAX_VALUE))
 	        );
 	        topPanel.setLayout(gl_topPanel);
 	        splitPane.setBottomComponent(bottomPanel);            // and at the bottom we want our "bottomPanel"
@@ -135,6 +167,15 @@ public class SearchResult extends JFrame {
 	        }
 	        scrollPane.setViewportView(list);
 	        list.setModel(mode);
+	        
+	        list.addListSelectionListener(new ListSelectionListener() {
+				
+				@Override
+				public void valueChanged(ListSelectionEvent e) {
+					index = list.getSelectedIndex();
+			}
+			});
+	        
 
 	        // let's set the maximum size of the inputPanel, so it doesn't get too big when the user resizes the window
 	  

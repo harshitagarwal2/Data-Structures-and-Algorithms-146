@@ -16,7 +16,7 @@ public class WebURLModel implements Comparable<WebURLModel> {
 	private int frequency;
 	private int age;
 	private int links;
-	private int money;
+	private double money;
 	private int index = 0;
 	
 
@@ -31,6 +31,7 @@ public class WebURLModel implements Comparable<WebURLModel> {
 		this.age = age;
 		this.money = 1;
 		generatePriority();
+		parseUrl();
 	}
 	
 	public WebURLModel(String URL, int frequency , int age, int index) {
@@ -42,6 +43,7 @@ public class WebURLModel implements Comparable<WebURLModel> {
 		this.age = age;
 		this.money = 1;
 		generatePriority();
+		parseUrl();
 	}
 
 	/**
@@ -155,15 +157,15 @@ public class WebURLModel implements Comparable<WebURLModel> {
 	/**
 	 * @return
 	 */
-	public int getMoney() {
+	public double getMoney() {
 		return money;
 	}
 
 	/**
-	 * @param money
+	 * @param d
 	 */
-	public void setMoney(int money) {
-		this.money = money;
+	public void setMoney(double d) {
+		this.money = d;
 		generatePriority();
 	}
 
@@ -182,6 +184,12 @@ public class WebURLModel implements Comparable<WebURLModel> {
 	
 	public String shortString() {
 		return "P:"+getPriority()+",I:"+getIndex();
+	}
+	
+	public void parseUrl() {
+		if(URL.startsWith("www.")) {
+			URL = URL.substring(4);
+		}
 	}
 
 }

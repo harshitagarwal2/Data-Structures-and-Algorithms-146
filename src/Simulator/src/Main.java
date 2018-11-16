@@ -13,8 +13,10 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 import models.CrawlerModel;
 import models.QuickSortModel;
+import models.TrendingKeywordsModel;
 import models.WebURLModel;
 import views.SearchResult;
+import views.TrendingWords;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -57,7 +59,7 @@ public class Main {
 	private void initialize() {
 		myframe = this;
 		frame = new JFrame();
-		frame.setBounds(100, 100, 1280, 720);
+		frame.setBounds(0, 0, 1280, 720);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JLabel lblNewLabel = new JLabel("Crawl Searcher");
@@ -77,18 +79,35 @@ public class Main {
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				models.QuickSortModel ob = new QuickSortModel();
-				String query = btnSearch.getText();
+				String query = textField.getText();
+				System.out.println(query);
 				CrawlerModel my = new CrawlerModel();
 				try {
 					my.getURLS(query);
 					ArrayList<WebURLModel> result = my.insertWebURIs();
 					SearchResult search = new SearchResult(result);
-					search.setVisible(true);
+							search.setVisible(true);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			
+			}
+		});
+		
+		JLabel lblSearchForUrls = new JLabel("Search For URLS:");
+		lblSearchForUrls.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
+		
+		JLabel lblTrendingKeywords = new JLabel("Trending Keywords");
+		lblTrendingKeywords.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
+		
+		JButton btnSearchTrends = new JButton("Search Trends");
+		btnSearchTrends.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TrendingKeywordsModel model = new TrendingKeywordsModel();
+				ArrayList<String> result = model.getTrends();
+				TrendingWords view = new TrendingWords(result);
+				view.setVisible(true);
 			}
 		});
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
@@ -100,22 +119,38 @@ public class Main {
 							.addGap(155)
 							.addComponent(lblSearchAKeyword)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 141, GroupLayout.PREFERRED_SIZE))
+							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 141, GroupLayout.PREFERRED_SIZE)
+							.addGap(376)
+							.addComponent(btnSearchTrends))
 						.addGroup(gl_panel_1.createSequentialGroup()
 							.addGap(228)
-							.addComponent(btnSearch)))
-					.addContainerGap(871, Short.MAX_VALUE))
+							.addComponent(btnSearch))
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(232)
+							.addComponent(lblSearchForUrls)
+							.addGap(379)
+							.addComponent(lblTrendingKeywords)))
+					.addContainerGap(476, Short.MAX_VALUE))
 		);
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
-					.addGap(190) 
+					.addGap(108)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblSearchAKeyword)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addComponent(btnSearch)
-					.addContainerGap(401, Short.MAX_VALUE))
+						.addComponent(lblSearchForUrls)
+						.addComponent(lblTrendingKeywords))
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(68)
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblSearchAKeyword)
+								.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addGap(18)
+							.addComponent(btnSearch))
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(52)
+							.addComponent(btnSearchTrends)))
+					.addContainerGap(396, Short.MAX_VALUE))
 		);
 		panel_1.setLayout(gl_panel_1);
 	}
