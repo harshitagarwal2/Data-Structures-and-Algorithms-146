@@ -84,7 +84,7 @@ public class CrawlerModel {
           Document doc = Jsoup
                   .connect(url)
                   .userAgent("Jsoup client")
-                  .timeout(5000).get();
+                  .get();
 
           Elements links = doc.select("a[href]");
 

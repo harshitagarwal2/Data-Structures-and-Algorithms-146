@@ -23,6 +23,17 @@ public class WebURLModel implements Comparable<WebURLModel> {
 	/*
 	 * Constructor
 	 */
+	
+	public WebURLModel(String URL) {
+		this.URL = URL;
+		this.age=0;
+		this.frequency=0;
+		this.money = 0;
+		this.priority =0;
+		this.links= 0;
+	}
+	
+	
 	public WebURLModel(String URL, int frequency, int links, int age, int index) {
 		this.URL = URL;
 		this.index = index;
@@ -82,9 +93,7 @@ public class WebURLModel implements Comparable<WebURLModel> {
 	 * setter
 	 * @param URL sert
 	 */
-	public WebURLModel(String URL) {
-		this.URL = URL;
-	}
+	
 
 	/**
 	 * setter

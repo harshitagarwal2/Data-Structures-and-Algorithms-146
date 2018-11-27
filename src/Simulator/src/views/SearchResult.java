@@ -115,6 +115,15 @@ public class SearchResult extends JFrame {
 	        		myframe.setVisible(false);
 	        	}
 	        });
+	        
+	        JButton btnRedBlackTree = new JButton("Red Black Tree");
+	        btnRedBlackTree.addActionListener(new ActionListener() {
+	        	public void actionPerformed(ActionEvent arg0) {
+	        		TreeGUIPanel2 panel = new TreeGUIPanel2(results);
+	        		panel.setVisible(true);
+	        		myframe.setVisible(false);
+	        	}
+	        });
 	        GroupLayout gl_topPanel = new GroupLayout(topPanel);
 	        gl_topPanel.setHorizontalGroup(
 	        	gl_topPanel.createParallelGroup(Alignment.LEADING)
@@ -129,8 +138,9 @@ public class SearchResult extends JFrame {
 	        						.addComponent(btnSearchTree)
 	        						.addComponent(btnQuicksort)
 	        						.addComponent(btnUpdateItem)
-	        						.addComponent(btnBucketsort))))
-	        			.addContainerGap(52, Short.MAX_VALUE))
+	        						.addComponent(btnBucketsort)
+	        						.addComponent(btnRedBlackTree))))
+	        			.addContainerGap(42, Short.MAX_VALUE))
 	        );
 	        gl_topPanel.setVerticalGroup(
 	        	gl_topPanel.createParallelGroup(Alignment.LEADING)
@@ -145,7 +155,9 @@ public class SearchResult extends JFrame {
 	        			.addComponent(btnUpdateItem)
 	        			.addGap(27)
 	        			.addComponent(btnBucketsort)
-	        			.addContainerGap(464, Short.MAX_VALUE))
+	        			.addGap(26)
+	        			.addComponent(btnRedBlackTree)
+	        			.addContainerGap(393, Short.MAX_VALUE))
 	        );
 	        topPanel.setLayout(gl_topPanel);
 	        splitPane.setBottomComponent(bottomPanel);            // and at the bottom we want our "bottomPanel"

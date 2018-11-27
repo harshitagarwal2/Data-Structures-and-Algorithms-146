@@ -17,7 +17,6 @@ public class TrendingKeywordsModel {
 				  .data("query", "Java")
 				  .userAgent("Mozilla")
 				  .cookie("auth", "token")
-				  .timeout(3000)
 				  .get();
 		
 		  Elements links = doc.select("item");
