@@ -12,15 +12,17 @@ import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
 
 import models.BSTModel;
-import models.BSTModel2;
+import models.RBTreeModel;
 import models.Node;
 import models.Node2;
 import models.WebURLModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.ActionListener;
@@ -29,12 +31,12 @@ import java.awt.event.ActionEvent;
 
 public class TreeGUIPanel2 extends javax.swing.JFrame{
 	private static ArrayList<WebURLModel> results;
-	private static BSTModel2 tree;
+	private static RBTreeModel tree;
 	private JFrame myframe;
 	
-	private final JSplitPane splitPane;  // split the window in top and bottom
-    private final JPanel topPanel;       // container panel for the top
-    private final JPanel bottomPanel;    // container panel for the bottom
+	private  JSplitPane splitPane;  // split the window in top and bottom
+    private  JPanel topPanel;       // container panel for the top
+    private  JPanel bottomPanel;    // container panel for the bottom
     private JTextField txtPriority;
     private JTextField txtInserUrl;
     private JTextField txtInsertAge;
@@ -43,13 +45,14 @@ public class TreeGUIPanel2 extends javax.swing.JFrame{
     private JTextField textField;
 
     public TreeGUIPanel2(ArrayList<WebURLModel> list){
+    	try {
     	myframe = this;
     	results = list;
          splitPane = new JSplitPane();
 
         topPanel = new JPanel();         // our top component
         bottomPanel = new JPanel();
-        BSTModel2 model = new BSTModel2();
+        RBTreeModel model = new RBTreeModel();
         model.InsertList(results);
         tree = model;
         
@@ -112,6 +115,7 @@ public class TreeGUIPanel2 extends javax.swing.JFrame{
         txtEnterPriority.setColumns(10);
         
         JButton btnDelete = new JButton("Delete");
+        try {
         btnDelete.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		String item = txtEnterPriority.getText();
@@ -119,7 +123,12 @@ public class TreeGUIPanel2 extends javax.swing.JFrame{
         		repaint();
         	}
         });
-        
+        }catch (Exception e) {
+        	JOptionPane optionPane = new JOptionPane("ErrorMsg", JOptionPane.ERROR_MESSAGE);    
+    		JDialog dialog = optionPane.createDialog(e.getMessage());
+    		dialog.setAlwaysOnTop(true);
+    		dialog.setVisible(true);
+		}
         JLabel lblSort = new JLabel("Sort");
         
         JButton btnSort = new JButton("Sort");
@@ -222,6 +231,9 @@ public class TreeGUIPanel2 extends javax.swing.JFrame{
         
 
         pack();  
+    	}catch(Exception e) {
+    	
+    	}
      }
 
     public static void main(String args[]){

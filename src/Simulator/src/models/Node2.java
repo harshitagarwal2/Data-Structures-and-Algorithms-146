@@ -17,22 +17,23 @@ public class Node2 {
 	private Node2 left;
 	private Node2 right;
 	private String color;
-
-	// default constructor
-	// creates a randomized Process to store as the Node's data
-	public Node2() {
-	}
 	
 	public Node2(String c) {
 		WebURLModel model = new WebURLModel("NIL");
 		data= model;
 		color = c;
+		this.left = null;
+		this.right = null;
+		this.parent = null;
 	}
 	
 	// constructor that takes a Process as an argument and sets it as Process data in the Node
 	public Node2(WebURLModel p) {
 		this.data = p;
-	}
+		this.left = null;
+		this.right = null;
+		this.parent = null;
+		}
 	
 	// getter for data Process
 	public WebURLModel getData() {
@@ -80,6 +81,7 @@ public class Node2 {
 
 	public void setColor(String color) {
 		this.color = color;
+
 	}
 	
 	@Override

@@ -14,7 +14,7 @@ import models.*;
 import java.awt.FlowLayout;
 
 public class OutputTreePanel2 extends JPanel {
-	private static BSTModel2 tree;
+	private static RBTreeModel tree;
     @Override
     public void paintComponent(Graphics g) {
     	 drawNode(g, getWidth()/2, tree.getRoot(), getWidth()/2, 0);
@@ -37,7 +37,7 @@ public class OutputTreePanel2 extends JPanel {
 	    }
 	 }
 
-	public OutputTreePanel2(BSTModel2 btree) {
+	public OutputTreePanel2(RBTreeModel btree) {
 		tree = btree;
 		
 	}
