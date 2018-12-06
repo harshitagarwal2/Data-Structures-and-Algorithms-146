@@ -40,8 +40,9 @@ usrInput = reader.nextInt(); // reads user option
 				if(t!=null) {
 					System.out.println("Enter the friend's name:");
 					String s2 = sc.nextLine();
-					
-					t.addFriend(T.search(s2));
+					Person t2 = T.search(s2);
+					t.addFriend(t2);
+					t2.addFriend(t);
 				}else {
 					System.out.println("Invalid Input enter a new Name or insert a new Person." );
 					menuChoices();
@@ -58,8 +59,10 @@ usrInput = reader.nextInt(); // reads user option
 				System.out.println("Enter the account name to remove the person:");
 				String s1=	sc.nextLine();
 			t.delete(s1);
-			System.out.println("Press 7 for user-menu");
-
+			Person t1 = T.search(s1);
+			if(t1!= null) {
+				t1.delete(t.getName());
+			}
 			}else {
 				System.out.println("Invalid Input enter a new Name or insert a new Person." );
 				continue;
@@ -88,14 +91,30 @@ usrInput = reader.nextInt(); // reads user option
 				System.out.println("User not found.");
 			}
 			}
-			
+
 			else if (usrInput == 6) {
+				Scanner sc = new Scanner(System.in);
+				System.out.println("Enter the first person name to check:");
+				String s=	sc.nextLine();
+				Person t = T.search(s);
+				if(t!=null) {
+					System.out.println("Enter the second person name to check:");
+					String name=	sc.nextLine();
+					boolean f = t.checkFriends(name);
+					if(f) System.out.println("Yes!. Both are friends. :-)");
+					else System.out.println("NO");
+				}else {
+					System.out.println("User not found.");
+				}
+					}
+			
+			else if (usrInput == 7) {
 				T.printList();
 					}
-			else if (usrInput == 7) {
+			else if (usrInput == 8) {
 			menuChoices();
 			}
-			else if (usrInput == 8) {
+			else if (usrInput == 9) {
 				isRunning = false; // ends loop of user menu options
 			}
 
@@ -112,9 +131,10 @@ usrInput = reader.nextInt(); // reads user option
 		System.out.println("3.) Remove a person from the friend's List");
 		System.out.println("4.) List friends in my Account Name.");
 		System.out.println("5.) List friends of a person's name.");
-		System.out.println("6.) Print all the users in the DB.");
-		System.out.println("7.) Show User Dialog");
-		System.out.println("8.) Exit Program");
+		System.out.println("6.) Enter two people to search if they are friends or not.");
+		System.out.println("7.) Print all the users in the DB.");
+		System.out.println("8.) Show User Dialog");
+		System.out.println("9.) Exit Program");
 		
 		
 		System.out.println();

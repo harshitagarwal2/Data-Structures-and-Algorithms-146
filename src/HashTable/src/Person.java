@@ -30,15 +30,7 @@ public class Person {
 	public void addFriend(Person p) {
 		friends.addNode(new HashNode(p));
 		friendsCount++;
-		System.out.println(this.name + " added" + p.name + "as a friend.");
-	}
-	
-	public void removeFriend(String name) {
-		HashNode n = findNode(name);
-		friends.removeNode(n);
-		friendsCount--;
-		System.out.println(this.name + " removed " + name + "as a friend.");
-
+		System.out.println(this.name + " added " + p.name + " as a friend.");
 	}
 	
     public void delete(String name){
@@ -75,23 +67,21 @@ System.out.print("\nDeleted patient "+prev.getData().name);
         }
     }
 	
-	public HashNode findNode(String name) {
-		HashNode curr = friends.getFirst();
-		HashNode del = null;
-		while(curr.getNext()!= null && curr.getData().name.equalsIgnoreCase(name) ) {
-			if(curr.getData().name.equals(name)) {
-				del=curr;
+
+	
+	public boolean checkFriends(String name) {
+		HashNode first = friends.getFirst();
+		HashNode prev = first;
+		while(first != null) {
+			if(first.getData().getName().equalsIgnoreCase(name)) {
+				return true;
 			}else {
-				curr= curr.getNext();
+				first = first.getNext();
 			}
 		}
-		if(del==null) {
-			System.out.println("invalid name");
-		}
-		return del;
-	
-
+		return false;
 	}
+
 	
 
 	  public void printFriends(){
