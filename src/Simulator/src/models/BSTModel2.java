@@ -77,7 +77,7 @@ public class BSTModel2 {
 		if (x.getRight() != null)
 			return this.treeMinimum(x.getRight());
 		
-		Node2 y = new Node2();
+		Node2 y = new Node2("Black");
 		y = x.getParent();
 		
 		while (y != null && x.data.getPriority() == y.getRight().data.getPriority()) {

@@ -43,6 +43,7 @@ public class TreeGUIPanel2 extends javax.swing.JFrame{
     private JTextField txtInsertFrequency;
     private JTextField txtEnterPriority;
     private JTextField textField;
+    private JTextField txtInser;
 
     public TreeGUIPanel2(ArrayList<WebURLModel> list){
     	try {
@@ -146,45 +147,67 @@ public class TreeGUIPanel2 extends javax.swing.JFrame{
         textField.setColumns(10);
         
         JLabel lblSearchResult = new JLabel("Search Result:");
+        
+        txtInser = new JTextField();
+        txtInser.setText("Inser");
+        txtInser.setColumns(10);
+        
+        JButton btnAdd_1 = new JButton("Add");
+        btnAdd_1.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		double pri = Double.parseDouble(txtInser.getText());
+        		WebURLModel m = new WebURLModel(pri);
+        		tree.rbInsert(new Node2(m));
+        		repaint();
+        	}
+        });
         GroupLayout gl_topPanel = new GroupLayout(topPanel);
         gl_topPanel.setHorizontalGroup(
         	gl_topPanel.createParallelGroup(Alignment.LEADING)
         		.addGroup(gl_topPanel.createSequentialGroup()
         			.addContainerGap()
         			.addGroup(gl_topPanel.createParallelGroup(Alignment.LEADING)
-        				.addGroup(Alignment.TRAILING, gl_topPanel.createSequentialGroup()
-        					.addComponent(lblOperations)
-        					.addGap(75))
         				.addGroup(gl_topPanel.createSequentialGroup()
-        					.addComponent(lblSearch)
-        					.addGap(18)
-        					.addGroup(gl_topPanel.createParallelGroup(Alignment.LEADING)
-        						.addComponent(btnSearch)
-        						.addComponent(txtPriority, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        					.addContainerGap(48, Short.MAX_VALUE))
-        				.addGroup(gl_topPanel.createSequentialGroup()
-        					.addComponent(textField, GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+        					.addGap(6)
+        					.addComponent(btnAdd_1)
         					.addContainerGap())
-        				.addGroup(gl_topPanel.createSequentialGroup()
-        					.addComponent(lblSearchResult)
-        					.addContainerGap(143, Short.MAX_VALUE))
-        				.addGroup(gl_topPanel.createSequentialGroup()
-        					.addComponent(lblAdd)
-        					.addContainerGap(166, Short.MAX_VALUE))
-        				.addGroup(gl_topPanel.createSequentialGroup()
-        					.addGroup(gl_topPanel.createParallelGroup(Alignment.LEADING)
-        						.addComponent(lblDelete)
-        						.addComponent(lblSort))
-        					.addGap(20)
-        					.addGroup(gl_topPanel.createParallelGroup(Alignment.LEADING)
-        						.addComponent(btnSort)
-        						.addComponent(txtInserUrl, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(txtInsertAge, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(txtInsertFrequency, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(btnAdd)
-        						.addComponent(txtEnterPriority, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(btnDelete))
-        					.addContainerGap(48, Short.MAX_VALUE))))
+        				.addGroup(gl_topPanel.createParallelGroup(Alignment.LEADING)
+        					.addGroup(Alignment.TRAILING, gl_topPanel.createSequentialGroup()
+        						.addComponent(lblOperations)
+        						.addGap(75))
+        					.addGroup(Alignment.TRAILING, gl_topPanel.createSequentialGroup()
+        						.addComponent(lblSearch)
+        						.addGap(18)
+        						.addGroup(gl_topPanel.createParallelGroup(Alignment.LEADING)
+        							.addComponent(btnSearch)
+        							.addComponent(txtPriority, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        					.addGroup(Alignment.TRAILING, gl_topPanel.createSequentialGroup()
+        						.addComponent(textField, GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+        						.addContainerGap())
+        					.addGroup(Alignment.TRAILING, gl_topPanel.createSequentialGroup()
+        						.addComponent(lblSearchResult)
+        						.addContainerGap(104, Short.MAX_VALUE))
+        					.addGroup(Alignment.TRAILING, gl_topPanel.createSequentialGroup()
+        						.addComponent(lblAdd)
+        						.addContainerGap(163, Short.MAX_VALUE))
+        					.addGroup(Alignment.TRAILING, gl_topPanel.createSequentialGroup()
+        						.addGroup(gl_topPanel.createParallelGroup(Alignment.LEADING)
+        							.addComponent(lblDelete)
+        							.addComponent(lblSort))
+        						.addGap(20)
+        						.addGroup(gl_topPanel.createParallelGroup(Alignment.LEADING)
+        							.addComponent(btnSort)
+        							.addComponent(txtInserUrl, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        							.addComponent(txtInsertAge, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        							.addComponent(txtInsertFrequency, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        							.addComponent(btnAdd)
+        							.addComponent(txtEnterPriority, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        							.addComponent(btnDelete))
+        						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        					.addGroup(gl_topPanel.createSequentialGroup()
+        						.addComponent(txtInser, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        						.addContainerGap(70, Short.MAX_VALUE)))))
         );
         gl_topPanel.setVerticalGroup(
         	gl_topPanel.createParallelGroup(Alignment.LEADING)
@@ -221,7 +244,11 @@ public class TreeGUIPanel2 extends javax.swing.JFrame{
         			.addComponent(lblSearchResult)
         			.addGap(32)
         			.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        			.addContainerGap(171, Short.MAX_VALUE))
+        			.addGap(27)
+        			.addComponent(txtInser, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(btnAdd_1)
+        			.addContainerGap(29, Short.MAX_VALUE))
         );
         topPanel.setLayout(gl_topPanel);
         splitPane.setBottomComponent(panel);         

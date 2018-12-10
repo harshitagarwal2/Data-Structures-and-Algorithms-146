@@ -237,61 +237,81 @@ public class RBTreeModel {
 	public void rbDeleteFixup(Node2 x) {
 		Node2 w;
 		
-		while ((x != root) && (x.getColor() == "BLACK")) {
-			if (x == x.getParent().getLeft()) {
-				w = x.getParent().getRight();
-				if (w.getColor() == "RED") {
-					w.setColor("BLACK");
-					x.getParent().setColor("RED");
-					leftRotate(x.getParent());
-					w = x.getParent().getRight();
-				}
-				if ((w.getLeft().getColor() == "BLACK") && (w.getRight().getColor() == "BLACK")) {
-					w.setColor("RED");
-					x = x.getParent();
-				}
-				else if (w.getRight().getColor() == "BLACK") {
-					w.getLeft().setColor("BLACK");
-					w.setColor("RED");
-					rightRotate(w);
-					w = x.getParent().getRight();
-				}
-				
-				w.setColor(x.getParent().getColor());
-				x.getParent().setColor("BLACK");
-				w.getRight().setColor("BLACK");
-				leftRotate(x.getParent());
-				x = root;
-			}
-			else {
-				w = x.getParent().getLeft();
-				if (w.getColor() == "RED") {
-					w.setColor("BLACK");
-					x.getParent().setColor("RED");
-					rightRotate(x.getParent());
-					w = x.getParent().getLeft();
-				}
-				if ((w.getRight().getColor() == "BLACK") && (w.getLeft().getColor() == "BLACK")) {
-					w.setColor("RED");
-					x = x.getParent();
-				}
-				else if (w.getLeft().getColor() == "BLACK") {
-					w.getRight().setColor("BLACK");
-					w.setColor("RED");
-					leftRotate(w);
-					w = x.getParent().getLeft();
-				}
-				
-				w.setColor(x.getParent().getColor());
-				x.getParent().setColor("BLACK");
-				w.getLeft().setColor("BLACK");
-				rightRotate(x.getParent());
-				x = root;
-			}
-		}
-		
-		x.setColor("BLACK");
-	}
+	    while(x != root & x.getColor() == "BLACK"){
+
+            if(x == x.getParent().getLeft()){
+                w = x.getParent().getRight();
+
+                // Case 1: W's getColor() is "RED"
+                if(w.getColor() == "RED"){
+                    w.setColor("BLACK");
+                    x.getParent().setColor("RED");
+                    leftRotate(x.getParent());
+                    w = x.getParent().getRight();
+                }
+
+                // Case 2: Both W's children are "BLACK"
+                if(w.getLeft().getColor() == "BLACK" & w.getRight().getColor() == "BLACK"){
+                    w.setColor("RED");
+                    x = x.getParent();
+                }
+
+                // Case 3:
+                else if(w.getRight().getColor() == "BLACK"){
+                    w.getLeft().setColor("BLACK");
+                    w.setColor("RED");
+                    rightRotate(w);
+                    w = x.getParent().getRight();
+                }
+
+                // Case 4
+                else{
+                    w.setColor(x.getParent().getColor());
+                    x.getParent().setColor("BLACK");
+                    w.getRight().setColor("BLACK");
+                    leftRotate(x.getParent());
+                    x = root;
+                }
+            }
+
+            else {
+                w = x.getParent().getLeft();
+
+                // Case 1: W's getColor() is "RED"
+                if(w.getColor() == "RED"){
+                    w.setColor("BLACK");
+                    x.getParent().setColor("RED");
+                    rightRotate(x.getParent());
+                    w = x.getParent().getLeft();
+                }
+
+                // Case 2: Both W's children are "BLACK"
+                if(w.getRight().getColor() == "BLACK" & w.getLeft().getColor() == "BLACK"){
+                    w.setColor("RED");
+                    x = x.getParent();
+                }
+
+                // Case 3: W's left child
+                else if(w.getLeft().getColor() == "BLACK"){
+                    w.getRight().setColor("BLACK");
+                    w.setColor("RED");
+                    leftRotate(w);
+                    w = x.getParent().getLeft();
+                }
+
+                // Case 4: W is "BLACK" and W.left is "RED"
+                else{
+                    w.setColor(x.getParent().getColor());
+                    x.getParent().setColor("BLACK");
+                    w.getLeft().setColor("BLACK");
+                    rightRotate(x.getParent());
+                    x = root;
+                }
+
+            }
+        } // end of while loogetParent()
+        x.setColor("BLACK");
+    }
 	
 	// causes a left rotation of nodes so that the red black tree can maintain its balanced structure
 	public void leftRotate(Node2 x) {
@@ -347,7 +367,7 @@ public class RBTreeModel {
 	
 	public void InsertList(ArrayList<WebURLModel> list) {
 
-		for(int i=1; i< list.size() ; i++) {
+		for(int i=1; i< 2 ; i++) {
 			rbInsert(new Node2(list.get(i)));
 		}
 	}

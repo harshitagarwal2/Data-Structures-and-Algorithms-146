@@ -56,6 +56,17 @@ public class WebURLModel implements Comparable<WebURLModel> {
 		generatePriority();
 		parseUrl();
 	}
+	
+	public WebURLModel(double p) {
+		this.URL = "Test";
+		this.index = 1;
+		this.frequency = 1;
+		this.links = 1;
+		this.age = 1;
+		this.money = 1;
+		this.priority = p;
+		
+	}
 
 	/**
 	 * getters
