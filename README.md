@@ -10,6 +10,10 @@
   * QuickSort
   * HeapSort
   * MergeSort
+  * Insertion Sort
+  * Radix sort 
+  * Counting Sort 
+  * Bucket Sort
   
 * Data Structures:
   * Red-Black Trees
@@ -18,9 +22,9 @@
   * Binary Search Trees
   * Hash Tables with Chaining 
   
-### The solutions contains solution to certain problems faced in our lifes and how these data structures and algorithms can help 
-in solving those problems in an efficient way
+#### The solutions contains solution to certain problems faced in our lifes and how these data structures and algorithms can help in solving those problems in an efficient way
 
   * Hospital Patient Scheduling Problem
   * Building your own search engine.
-  * Qptimizing the queries and search results.
+  * Optimizing the queries and search results with Binary Trees
+  * Facebook's Friend List using Hash Tables
